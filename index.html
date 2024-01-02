@@ -1,31 +1,29 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-  <style>
-    #map { width: 900px; height: 500px; }
-  </style>
-</head>
 <body>
+<h1>Geolocation Finder</h1>
+<p>Click the button to get your coordinates.</p>
 
-  <div id="map"></div>
+<button onclick="getLocation()">Get co-ordinates</button>
 
-  <script>
+<p id="demo"></p>
 
-  // initialize the map
-  var map = L.map('map').setView([42.35, -71.08], 13);
+<script>
+const x = document.getElementById("demo");
 
-  // load a tile layer
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-  }).addTo(map);
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
 
-  </script>
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
 </body>
 </html>
