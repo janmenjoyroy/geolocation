@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
+	<head>
+	<style>
+		.button {
+		  background-color: #04AA6D; /* Green */
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;		  
+		  margin: 4px 2px;
+		  cursor: pointer;
+		}
+
+		.button2 {background-color: #008CBA;} /* Blue */
+		.button3 {background-color: #f44336;} /* Red */ 
+		.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+		.button5 {background-color: #555555;} /* Black */
+	</style>
+</head>
  
 <body>
-    <h1 style="color: green">Geolocation Finder</h1>
-    <h3>Locating the current co-ordinates</h3>
+    <h1 style="color: blue; font-size:30px; font-family:verdana">Geolocation Finder</h1>
+    <h3 style="font-size:20px; font-family:verdana">Locating the current co-ordinates</h3>
     <div>
-        <button onclick="geolocator()">
+        <button class="button button2" onclick="geolocator()">
             Click to get co-ordinates
         </button>
-        <p id="paraGraph"></p>
+        <p id="paraGraph" style="color: blue; font-size:20px"></p>
     </div>
     <script>
         let paraGraph = document.getElementById("paraGraph");
@@ -23,13 +44,11 @@
         function success(data) {
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
-            let tmstmp = data.timestamp;
-            paraGraph.innerHTML = "Latitude: "
+            paraGraph.innerHTML = 
+				"<br><b>Latitude:</b> "
                 + lat
-                + "<br>Longitude: "
+                + "<br><b>Longitude:</b> "
                 + long
-                + "<br>Timestamp: "
-                + tmstmp;
         }
     </script>
 </body>
