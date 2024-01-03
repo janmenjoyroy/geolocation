@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html>
+ 
 <body>
-<h1>Geolocation Finder</h1>
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Get co-ordinates</button>
-
-<p id="demo"></p>
-
-<script>
-const x = document.getElementById("demo");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
-
+    <h1 style="color: green">Geolocation Finder</h1>
+    <h3>Locating the current co-ordinates</h3>
+    <div>
+        <button onclick="geolocator()">
+            Click to get co-ordinates
+        </button>
+        <p id="paraGraph"></p>
+    </div>
+    <script>
+        let paraGraph = document.getElementById("paraGraph");
+        let user_loc = navigator.geolocation;
+        function geolocator() {
+            if (user_loc) {
+                user_loc.getCurrentPosition(success);
+            } else {
+                "Your browser doesn't support geolocation API";
+            }
+        }
+        function success(data) {
+            let lat = data.coords.latitude;
+            let long = data.coords.longitude;
+            let tmstmp = data.timestamp;
+            paraGraph.innerHTML = "Latitude: "
+                + lat
+                + "<br>Longitude: "
+                + long
+                + "<br>Timestamp: "
+                + tmstmp;
+        }
+    </script>
 </body>
 </html>
