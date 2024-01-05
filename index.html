@@ -44,11 +44,17 @@
         function success(data) {
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
+	    let altitude = data.coords.altitude;
+	    let altitudeAccuracy = data.coords.altitudeAccuracy;
             paraGraph.innerHTML = 
-				"<br><b>Latitude:</b> "
+		"<br><b>Latitude:</b> "
                 + lat
                 + "<br><b>Longitude:</b> "
                 + long
+		+ "<br><b>Altitude:</b> "
+                + altitude
+		+ "<br><b>Altitude accuracy:</b> "
+                + altitudeAccuracy
         }
     </script>
 </body>
