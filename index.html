@@ -76,9 +76,9 @@
             let long = data.coords.longitude;
 	    let altitude = data.coords.altitude;
 	    if(altitude)
-		    altitude = parseFloat(altitude).toFixed(2) + altitudeCalibrationFactor;
+		    altitude = parseFloat(altitude + altitudeCalibrationFactor).toFixed();		
+	    console.log("Altitude: ", altitude);
 	    let accuracy = data.coords.accuracy;
-	    console.log("Altitude: ", altitude)
 	    if(accuracy)
 		    accuracy = parseFloat(accuracy).toFixed(2);
 	    console.log("Accuracy: ", accuracy)
