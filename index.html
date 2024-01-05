@@ -74,6 +74,7 @@
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
 	    let altitude = data.coords.altitude;
+	    let accuracy = data.coords.accuracy;
 	    let altitudeAccuracy = data.coords.altitudeAccuracy;
             paraGraph.innerHTML = 
 		"<br><b>Latitude:</b> "
@@ -82,6 +83,8 @@
                 + long
 		+ "<br><b>Altitude:</b> "
                 + altitude
+		+ "<br><b>Accuracy:</b> "
+		+accuracy
         }
     </script>
 </body>
