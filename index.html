@@ -71,16 +71,17 @@
 
 	// Success callback
         function success(data) {
+	    let altitudeCalibrationFactor = 30;
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
 	    let altitude = data.coords.altitude;
-	    console.log("altitude: ", altitude)
 	    if(altitude)
-		    altitude = parseFloat(altitude).toFixed(2);
+		    altitude = parseFloat(altitude).toFixed(2) + altitudeCalibrationFactor;
 	    let accuracy = data.coords.accuracy;
-	    console.log("altitude: ", altitude)
+	    console.log("Altitude: ", altitude)
 	    if(accuracy)
 		    accuracy = parseFloat(accuracy).toFixed(2);
+	    console.log("Accuracy: ", accuracy)
 	    
             paraGraph.innerHTML = 
 		"<br><b>Latitude:</b> "
