@@ -36,11 +36,40 @@
         let user_loc = navigator.geolocation;
         function geolocator() {
             if (user_loc) {
-                user_loc.getCurrentPosition(success);
+                user_loc.getCurrentPosition(
+			success,
+			errorCallback_highAccuracy,
+			{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
             } else {
                 "Your browser doesn't support geolocation API";
             }
         }
+
+	// Error callback
+	function errorCallback_highAccuracy(error) {
+	    if (error.code == error.TIMEOUT)
+	    {
+	        // Attempt to get GPS loc timed out after 5 seconds, 
+	        // try low accuracy location
+	        $('body').append("attempting to get low accuracy location");
+	        navigator.geolocation.getCurrentPosition(
+	               successCallback, 
+	               errorCallback_lowAccuracy,
+	               {maximumAge:600000, timeout:10000, enableHighAccuracy: false});
+	        return;
+	    }
+    
+	    var msg = "<p>Can't get your location (high accuracy attempt). Error = ";
+	    if (error.code == 1)
+	        msg += "PERMISSION_DENIED";
+	    else if (error.code == 2)
+	        msg += "POSITION_UNAVAILABLE";
+	    msg += ", msg = "+error.message;
+	    
+	    $('body').append(msg);
+	}
+
+	// Success callback
         function success(data) {
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
