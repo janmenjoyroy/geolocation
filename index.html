@@ -74,8 +74,14 @@
             let lat = data.coords.latitude;
             let long = data.coords.longitude;
 	    let altitude = data.coords.altitude;
+	    console.log("altitude: ", altitude)
+	    if(altitude)
+		    altitude = parseFloat(altitude).toFixed(2);
 	    let accuracy = data.coords.accuracy;
-	    let altitudeAccuracy = data.coords.altitudeAccuracy;
+	    console.log("altitude: ", altitude)
+	    if(accuracy)
+		    accuracy = parseFloat(accuracy).toFixed(2);
+	    
             paraGraph.innerHTML = 
 		"<br><b>Latitude:</b> "
                 + lat
@@ -85,8 +91,6 @@
                 + altitude.toFixed(2) + " meters"
 		+ "<br><b>GPS Accuracy:</b> "
 		+ accuracy.toFixed(2)
-		+ "<br><b>Altitude Accuracy:</b> "
-		+ altitudeAccuracy ? altitudeAccuracy.toFixed(2) : altitudeAccuracy
         }
     </script>
 </body>
