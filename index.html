@@ -82,11 +82,11 @@
                 + "<br><b>Longitude:</b> "
                 + long
 		+ "<br><b>Altitude:</b> "
-                + altitude + " meters"
+                + altitude.toFixed(2) + " meters"
 		+ "<br><b>GPS Accuracy:</b> "
-		+ accuracy
+		+ accuracy.toFixed(2)
 		+ "<br><b>Altitude Accuracy:</b> "
-		+ altitudeAccuracy
+		+ altitudeAccuracy ? altitudeAccuracy.toFixed(2) : altitudeAccuracy
         }
     </script>
 </body>
