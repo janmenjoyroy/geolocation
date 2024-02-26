@@ -37,18 +37,27 @@
 			background-color: #555555;
 		}
 
+		.values {
+			font-size:25px;
+			font-family:verdana
+		}
+
+		.center-aligned-page {
+			margin: auto;
+		}
+
 		/* Black */
 	</style>
 </head>
 
-<body>
+<body class="center-aligned-page">
 	<h1 style="color: blue; font-size:30px; font-family:verdana">Geolocation Finder</h1>
-	<h3 style="font-size:20px; font-family:verdana">Locating the current co-ordinates</h3>
+	<h3 class="values">Locating the current co-ordinates</h3>
 	<div>
 		<button class="button button2" onclick="location.reload()">
 			Click to get co-ordinates
 		</button>
-		<p id="paraGraph" style="color: blue; font-size:20px"></p>
+		<p id="paraGraph" class="values" style="color: blue;"></p>
 	</div>
 	<script>
 		let paraGraph = document.getElementById("paraGraph");
