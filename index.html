@@ -35,6 +35,7 @@
         let paraGraph = document.getElementById("paraGraph");
         let user_loc = navigator.geolocation;
         function geolocator() {
+	    window.location.reload()
             if (user_loc) {
                 user_loc.getCurrentPosition(
 			success,
