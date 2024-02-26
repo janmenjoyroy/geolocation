@@ -1,99 +1,117 @@
 <!DOCTYPE html>
 <html>
-	<head>
+
+<head>
 	<style>
 		.button {
-		  background-color: #04AA6D; /* Green */
-		  border: none;
-		  color: white;
-		  padding: 15px 32px;
-		  text-align: center;
-		  text-decoration: none;
-		  display: inline-block;
-		  font-size: 16px;		  
-		  margin: 4px 2px;
-		  cursor: pointer;
+			background-color: #04AA6D;
+			/* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
 		}
 
-		.button2 {background-color: #008CBA;} /* Blue */
-		.button3 {background-color: #f44336;} /* Red */ 
-		.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
-		.button5 {background-color: #555555;} /* Black */
+		.button2 {
+			background-color: #008CBA;
+		}
+
+		/* Blue */
+		.button3 {
+			background-color: #f44336;
+		}
+
+		/* Red */
+		.button4 {
+			background-color: #e7e7e7;
+			color: black;
+		}
+
+		/* Gray */
+		.button5 {
+			background-color: #555555;
+		}
+
+		/* Black */
 	</style>
 </head>
- 
+
 <body>
-    <h1 style="color: blue; font-size:30px; font-family:verdana">Geolocation Finder</h1>
-    <h3 style="font-size:20px; font-family:verdana">Locating the current co-ordinates</h3>
-    <div>
-        <button class="button button2" onclick="geolocator()">
-            Click to get co-ordinates
-        </button>
-        <p id="paraGraph" style="color: blue; font-size:20px"></p>
-    </div>
-    <script>
-        let paraGraph = document.getElementById("paraGraph");
-        let user_loc = navigator.geolocation;
-        function geolocator() {
-	    window.location.reload()
-            if (user_loc) {
-                user_loc.getCurrentPosition(
-			success,
-			errorCallback_highAccuracy,
-			{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
-            } else {
-                "Your browser doesn't support geolocation API";
-            }
-        }
+	<h1 style="color: blue; font-size:30px; font-family:verdana">Geolocation Finder</h1>
+	<h3 style="font-size:20px; font-family:verdana">Locating the current co-ordinates</h3>
+	<div>
+		<button class="button button2" onclick="location.reload()">
+			Click to get co-ordinates
+		</button>
+		<p id="paraGraph" style="color: blue; font-size:20px"></p>
+	</div>
+	<script>
+		let paraGraph = document.getElementById("paraGraph");
+		let user_loc = navigator.geolocation;
+		document.addEventListener("DOMContentLoaded", () => {
+			if (user_loc) {
+				user_loc.getCurrentPosition(
+					success, errorCallback_highAccuracy,
+					{ maximumAge: 600000, timeout: 5000, enableHighAccuracy: true }
+				);
+			} else {
+				"Your browser doesn't support geolocation API";
+			}
+		});
 
-	// Error callback
-	function errorCallback_highAccuracy(error) {
-	    if (error.code == error.TIMEOUT)
-	    {
-	        // Attempt to get GPS loc timed out after 5 seconds, 
-	        // try low accuracy location
-	        $('body').append("attempting to get low accuracy location");
-	        navigator.geolocation.getCurrentPosition(
-	               successCallback, 
-	               errorCallback_lowAccuracy,
-	               {maximumAge:600000, timeout:10000, enableHighAccuracy: false});
-	        return;
-	    }
-    
-	    var msg = "<p>Can't get your location (high accuracy attempt). Error = ";
-	    if (error.code == 1)
-	        msg += "PERMISSION_DENIED";
-	    else if (error.code == 2)
-	        msg += "POSITION_UNAVAILABLE";
-	    msg += ", msg = "+error.message;
-	    
-	    $('body').append(msg);
-	}
+		// Error callback
+		function errorCallback_highAccuracy(error) {
+			if (error.code == error.TIMEOUT) {
+				// Attempt to get GPS loc timed out after 5 seconds, 
+				// try low accuracy location
+				$('body').append("attempting to get low accuracy location");
+				navigator.geolocation.getCurrentPosition(
+					successCallback,
+					errorCallback_lowAccuracy,
+					{ maximumAge: 600000, timeout: 10000, enableHighAccuracy: false });
+				return;
+			}
 
-	// Success callback
-        function success(data) {
-	    let altitudeCalibrationFactor = 30;
-            let lat = data.coords.latitude;
-            let long = data.coords.longitude;
-	    let altitude = data.coords.altitude;
-	    if(altitude)
-		    altitude = parseFloat(altitude + altitudeCalibrationFactor).toFixed();		
-	    console.log("Altitude: ", altitude);
-	    let accuracy = data.coords.accuracy;
-	    if(accuracy)
-		    accuracy = parseFloat(accuracy).toFixed(2);
-	    console.log("Accuracy: ", accuracy)
-	    
-            paraGraph.innerHTML = 
-		"<br><b>Latitude:</b> "
-                + lat
-                + "<br><b>Longitude:</b> "
-                + long
-		// + "<br><b>Altitude:</b> "
-		// + altitude + " meters"
-		// + "<br><b>GPS Accuracy:</b> "
-		// + accuracy + " meters"
-        }
-    </script>
+			var msg = "<p>Can't get your location (high accuracy attempt). Error = ";
+			if (error.code == 1)
+				msg += "PERMISSION_DENIED";
+			else if (error.code == 2)
+				msg += "POSITION_UNAVAILABLE";
+			msg += ", msg = " + error.message;
+
+			$('body').append(msg);
+		}
+
+		// Success callback
+		function success(data) {
+			let altitudeCalibrationFactor = 30;
+			let lat = data.coords.latitude;
+			let long = data.coords.longitude;
+			let altitude = data.coords.altitude;
+			if (altitude)
+				altitude = parseFloat(altitude + altitudeCalibrationFactor).toFixed();
+			console.log("Altitude: ", altitude);
+			let accuracy = data.coords.accuracy;
+			if (accuracy)
+				accuracy = parseFloat(accuracy).toFixed(2);
+			console.log("Accuracy: ", accuracy)
+
+			paraGraph.innerHTML =
+				"<br><b>Latitude:</b> "
+				+ lat
+				+ "<br><b>Longitude:</b> "
+				+ long
+			// + "<br><b>Altitude:</b> "
+			// + altitude + " meters"
+			// + "<br><b>GPS Accuracy:</b> "
+			// + accuracy + " meters"
+		}
+	</script>
 </body>
+
 </html>
